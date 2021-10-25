@@ -4,6 +4,7 @@ import ConfirmModal from "../modals/ConfirmModal";
 import ExPending from "../exPending/Expending";
 
 const AdminEx = ({ el, updateEx, deleteEx, doneEx }) => {
+  console.log(el);
   const [modalTxt, setModalTxt] = useState({
     confirm: "승인",
     delete: "마감",
@@ -15,7 +16,6 @@ const AdminEx = ({ el, updateEx, deleteEx, doneEx }) => {
   };
 
   const clickDelete = () => {
-    //console.log(el, "elelelel");
     setConfirmModal(true);
   };
 
@@ -60,16 +60,18 @@ const AdminEx = ({ el, updateEx, deleteEx, doneEx }) => {
                       />
                     </div>
                     <div className={styles.infoBox}>
-                      <div className={styles.title}>{el.title}</div>
+                      <div className={styles.title}>작품명 : {el.title}</div>
                       <div
                         className={styles.detail}
                         onClick={() => clickAdminTitle(el.id)}
                       >
-                        [ 자세히 보기 ]
+                        자세히 보기 +
                       </div>
-                      <div className={styles.author}>{el.author.nickname}</div>
+                      <div className={styles.author}>
+                        작가명 : {el.author.nickname}
+                      </div>
                       <div className={styles.date}>
-                        <span>전시기간:</span>
+                        <span>전시기간 : </span>
                         <span>{el.start_date}</span>
                         <span>~</span>
                         <span>{el.end_date}</span>
@@ -105,10 +107,12 @@ const AdminEx = ({ el, updateEx, deleteEx, doneEx }) => {
                       />
                     </div>
                     <div className={styles.infoBox}>
-                      <div className={styles.title}>{el.title}</div>
-                      <div className={styles.author}>{el.author.nickname}</div>
+                      <div className={styles.title}>작품명 : {el.title}</div>
+                      <div className={styles.author}>
+                        작가명 : {el.author.nickname}
+                      </div>
                       <div className={styles.date}>
-                        <span>전시기간:</span>
+                        <span>전시기간 : </span>
                         <span>{el.start_date}</span>
                         <span>~</span>
                         <span>{el.end_date}</span>
@@ -144,10 +148,12 @@ const AdminEx = ({ el, updateEx, deleteEx, doneEx }) => {
                       />
                     </div>
                     <div className={styles.infoBox}>
-                      <div className={styles.title}>{el.title}</div>
-                      <div className={styles.author}>{el.author.nickname}</div>
+                      <div className={styles.title}>작품명 : {el.title}</div>
+                      <div className={styles.author}>
+                        작가명 : {el.author.nickname}
+                      </div>
                       <div className={styles.date}>
-                        <span>전시기간:</span>
+                        <span>전시기간 : </span>
                         <span>{el.start_date}</span>
                         <span>~</span>
                         <span>{el.end_date}</span>
