@@ -195,10 +195,7 @@ function App() {
             isAdmin={isAdmin}
             setModalOpen={setModalOpen}
           />
-          <Gallery 
-          isLogin={isLogin} 
-          userinfo={userinfo} 
-          />
+          <Gallery isLogin={isLogin} userinfo={userinfo} />
           <ScrollButton />
         </Route>
         <Route path="/gallerydetail/:id">
@@ -209,10 +206,10 @@ function App() {
             isAdmin={isAdmin}
             setModalOpen={setModalOpen}
           />
-          <GalleryDetail 
-          isLogin={isLogin}
-          userinfo={userinfo}
-          handle3dExhibition={(el) => setThreeDSelected(el)} 
+          <GalleryDetail
+            isLogin={isLogin}
+            userinfo={userinfo}
+            handle3dExhibition={(el) => setThreeDSelected(el)}
           />
           <ScrollButton />
         </Route>
@@ -278,7 +275,13 @@ function App() {
           <Contact />
         </Route>
         <Route exact path="/admin">
-          <Admin isAdmin={isAdmin} setisAdmin={setisAdmin} />
+          <Admin
+            isAdmin={isAdmin}
+            setisAdmin={setisAdmin}
+            isLogin={isLogin}
+            userinfo={userinfo}
+            handleLogout={handleLogout}
+          />
         </Route>
       </Switch>
     </ScrollTop>
