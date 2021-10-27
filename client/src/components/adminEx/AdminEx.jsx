@@ -4,7 +4,6 @@ import ConfirmModal from "../modals/ConfirmModal";
 import ExPending from "../exPending/Expending";
 
 const AdminEx = ({ el, updateEx, deleteEx, doneEx }) => {
-  console.log(el);
   const [modalTxt, setModalTxt] = useState({
     confirm: "승인",
     delete: "마감",

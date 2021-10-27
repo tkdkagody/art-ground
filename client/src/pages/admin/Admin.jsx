@@ -21,20 +21,24 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
   const [adExRender, setAdExRender] = useState(false); //새로고침시 랜더되도록
   const [exhibitData, setExhibitData] = useState([]); //데이터 상태값
   const [reviewData, setReviewData] = useState([]);
-  const [restData, setRestData] = useState([]); // 랜더 하고 남은 데이터
+  const [restData, setRestData] = useState([]); // 랜더 하고 남은 데이터(무한스크롤)
   const [isLoading, setIsLoading] = useState(true);
   const clickExColor = !exhibition ? styles.libox : styles.liboxClick; //대메뉴 css
   const clickRevColor = !review ? styles.libox : styles.liboxClick;
   const clickEXSmenu1 = !updateEx ? styles.btn : styles.btnClick; //ex소메뉴 css
   const clickEXSmenu2 = !deleteEx ? styles.btn : styles.btnClick;
   const clickEXSmenu3 = !doneEx ? styles.btn : styles.btnClick;
-  const [filter, setfilter] = useHistoryState("", "filter"); //검색하기 컨트롤
+  const [exFilter, setExFilter] = useHistoryState("", "filter"); // 전시관리 검색하기 컨트롤
   const [enteredWord, setEnteredWord] = useHistoryState("", "enteredWord");
-  //datepicker //createdAt: "2021-10-06T14:43:35.000Z"
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date()); //전시관리 날짜
   const [endDate, setEndDate] = useState(new Date());
   const [startDateNum, setStartDateNum] = useState();
   const [endDateNum, setEndDateNum] = useState();
+  const [revFilter, setRevFilter] = useHistoryState("", "revFilter"); //리뷰관리 검색하기 컨트롤
+  const [revEnteredWord, setRevEnteredWord] = useHistoryState(
+    "",
+    "revEnteredWord"
+  );
 
   const clickStartDate = (date) => {
     setStartDate(date);
@@ -64,28 +68,44 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
     }, 500);
   }, []);
 
-  const handleChange = (event) => {
+  const handleExChange = (event) => {
     setEnteredWord(event.target.value);
   };
-  const clickSearch = () => {
-    setfilter(enteredWord);
+  const clickExSearch = () => {
+    setExFilter(enteredWord);
   };
-  const handleInputClear = () => {
+  const handleExInputClear = () => {
     setEnteredWord("");
-    setfilter("");
+    setExFilter("");
   };
-  const handleKeyPress = (event) => {
+  const handleExKeyPress = (event) => {
     if (event.key === "Enter") {
-      clickSearch();
+      clickExSearch();
+    }
+  };
+
+  const handleRevChange = (event) => {
+    setRevEnteredWord(event.target.value);
+  };
+  const clickRevSearch = () => {
+    setRevFilter(revEnteredWord);
+  };
+  const handleRevInputClear = () => {
+    setRevEnteredWord("");
+    setRevFilter("");
+  };
+  const handleRevKeyPress = (event) => {
+    if (event.key === "Enter") {
+      clickRevSearch();
     }
   };
 
   useEffect(() => {
     if (exhibition) {
-      getAllExhibition(setExhibitData, filter, startDateNum, endDateNum);
+      getAllExhibition(setExhibitData, exFilter, startDateNum, endDateNum);
     }
     return () => {};
-  }, [exhibition, filter, startDateNum, endDateNum]);
+  }, [exhibition, exFilter, startDateNum, endDateNum]);
 
   const clickEx = () => {
     setExhibition(true);
@@ -141,17 +161,26 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
 
   const getFetchData = async () => {
     setIsLoading(true);
-    let data = await getinfiniteData();
+    let data = await getinfiniteData(revFilter);
     setReviewData(data.slice(0, 10));
     setRestData(data.slice(10));
     setIsLoading(false);
   };
 
+  // useEffect(() => {
+  //   if (exhibition) {
+  //     getAllExhibition(setExhibitData, exFilter, startDateNum, endDateNum);
+  //   }
+  //   return () => {};
+  // }, [exhibition, exFilter, startDateNum, endDateNum]);
+
   useEffect(() => {
     setTimeout(() => {
-      getFetchData();
+      if (review) {
+        getFetchData(review, revFilter);
+      }
     }, 200);
-  }, []);
+  }, [review, revFilter]);
 
   useEffect(() => {
     window.addEventListener("scroll", _infiniteScroll, true);
@@ -222,28 +251,31 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
                       className={styles.searchTxt}
                       placeholder="전시명 또는 작가명으로 검색하세요."
                       value={enteredWord}
-                      onChange={handleChange}
-                      onKeyPress={handleKeyPress}
+                      onChange={handleExChange}
+                      onKeyPress={handleExKeyPress}
                     />
-                    {filter.length !== 0 ? (
+                    {exFilter.length !== 0 ? (
                       <button
                         className={styles.deleteImg}
-                        onClick={handleInputClear}
+                        onClick={handleExInputClear}
                       >
                         <i className="fas fa-times"></i>
                       </button>
                     ) : null}
-                    <button className={styles.searchImg} onClick={clickSearch}>
+                    <button
+                      className={styles.searchImg}
+                      onClick={clickExSearch}
+                    >
                       <i className="fas fa-search"></i>
                     </button>
                   </div>
                 </div>
 
-                {filter !== "" && exhibitData.length === 0 ? (
+                {exFilter !== "" && exhibitData.length === 0 ? (
                   <div className={styles.searchRes}>검색 결과가 없습니다.</div>
-                ) : filter !== "" && exhibitData.length !== 0 ? (
+                ) : exFilter !== "" && exhibitData.length !== 0 ? (
                   <div className={styles.searchRes}>
-                    "{filter}" 검색결과 총 {exhibitData.length}
+                    "{exFilter}" 검색결과 총 {exhibitData.length}
                     건이 검색되었습니다.
                   </div>
                 ) : null}
@@ -261,7 +293,11 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
                           locale={ko}
                           dateFormat="yyyy-MM-dd"
                           className={styles.startDate}
+                          shouldCloseOnSelect={true}
                         />
+                      </div>
+                      <div>
+                        <i class="far fa-calendar-alt"></i>
                       </div>
                       ~
                       <div>
@@ -272,15 +308,13 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
                           locale={ko}
                           dateFormat="yyyy-MM-dd"
                           className={styles.endDate}
+                          shouldCloseOnSelect={true}
                         />
                       </div>
+                      <div>
+                        <i class="far fa-calendar-alt"></i>
+                      </div>
                     </label>
-                    {/* <button
-                      className={styles.dateSearch}
-                      onClick={clickDateSearch}
-                    >
-                      조회
-                    </button> */}
                   </ul>
                 </div>
 
@@ -306,9 +340,50 @@ const Admin = ({ isLogin, userinfo, handleLogout }) => {
           <div className={styles.exhibit}>
             {adExRender ? (
               <>
-                <div className={styles.btnbox}>
-                  <button className={clickEXSmenu3}>전체보기</button>
+                <div className={styles.searchBox}>
+                  <div className={styles.searchBorder}>
+                    <input
+                      type="text"
+                      className={styles.searchTxt}
+                      placeholder="키워드를 입력해주세요."
+                      value={revEnteredWord}
+                      onChange={handleRevChange}
+                      onKeyPress={handleRevKeyPress}
+                    />
+                    {revFilter.length !== 0 ? (
+                      <button
+                        className={styles.deleteImg}
+                        onClick={handleRevInputClear}
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                    ) : null}
+                    <button
+                      className={styles.searchImg}
+                      onClick={clickRevSearch}
+                    >
+                      <i className="fas fa-search"></i>
+                    </button>
+                  </div>
                 </div>
+
+                {revFilter !== "" && reviewData.length === 0 ? (
+                  <div className={styles.searchRes}>검색 결과가 없습니다.</div>
+                ) : revFilter !== "" && reviewData.length !== 0 ? (
+                  <div className={styles.searchRes}>
+                    "{revFilter}" 검색결과 총 {reviewData.length}
+                    건이 검색되었습니다.
+                  </div>
+                ) : null}
+
+                <div className={styles.infoBox}>
+                  <div className={styles.exImg}>작성자프로필</div>
+                  <div className={styles.exTitle}>전시명</div>
+                  <div className={styles.user}>작성자아이디</div>
+                  <div className={styles.comments}>댓글</div>
+                  <div className={styles.commentsDay}>작성일</div>
+                </div>
+
                 {reviewData.map((el, idx) => {
                   return <AdminReview key={idx} el={el} />;
                 })}

@@ -1,10 +1,8 @@
 import styles from "./AdminReview.module.css";
-
 import React, { useState } from "react";
 import ReviewDelModal from "../modals/ReviewDelModal";
 
 const AdminReview = ({ el }) => {
-  //console.log(el, "adminrevdata");
   const [deleteModal, setDeleteModal] = useState(false);
 
   const imgurl = el.user.profile_img
@@ -15,6 +13,8 @@ const AdminReview = ({ el }) => {
     setDeleteModal(true);
   };
 
+  const createdDay = el.createdAt.split("T")[0];
+  //console.log(el);
   return (
     <section className={styles.container}>
       <div className={styles.box}>
@@ -24,18 +24,10 @@ const AdminReview = ({ el }) => {
               <img src={imgurl} alt={imgurl} className={styles.eximg} />
             </div>
 
-            <div className={styles.infoBox}>
-              <div className={styles.title}>{el.title} </div>
-              <div className={styles.author}>
-                {" "}
-                전시명: {el.exhibition.title}
-              </div>
-              <div className={styles.user}>
-                {" "}
-                댓글 작성자: {el.user.nickname}
-              </div>
-              <div className={styles.comments}>댓글: {el.comments}</div>
-            </div>
+            <div className={styles.title}>{el.exhibition.title}</div>
+            <div className={styles.user}>{el.user.nickname}</div>
+            <div className={styles.comments}>{el.comments}</div>
+            <div className={styles.commentsDay}>{createdDay} </div>
           </div>
 
           <div className={styles.btnBox}>

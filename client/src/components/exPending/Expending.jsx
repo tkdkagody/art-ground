@@ -79,7 +79,9 @@ const ExPending = ({ clickedId, deleteEx, doneEx, setClickStatus }) => {
               return (
                 <>
                   <li>
-                    <span className={styles.sColumn}>작품 이미지</span>
+                    <span className={styles.sColumn}>
+                      작품 이미지 {idx + 1}
+                    </span>
                     <span className={styles.sContentImg}>
                       {el.image_urls === null ? (
                         <img
