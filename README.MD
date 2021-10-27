@@ -197,6 +197,11 @@ https://art-ground.io/
     <img width="700" src="https://user-images.githubusercontent.com/83934037/136756781-332c727d-ff7e-4291-9413-fca6b52b0a31.gif"/>
   </details>
   
+   <details>
+   <summary>내 정보 조회 (일반, 작가) </summary>
+   채우기
+  </details>
+  
   <details>
    <summary>내 정보 수정(비밀번호 제외)</summary>
     <img width="700" src="https://user-images.githubusercontent.com/79203932/136372647-bad6c81d-c8d4-4387-8020-e6c31df6f34c.gif"/>
@@ -219,6 +224,20 @@ https://art-ground.io/
 <details>
  <summary>Admin 페이지</summary>
   
+   <details>
+   <summary>전시 조회</summary>
+        채우기
+  </details>
+  
+  <details>
+   <summary>전시 검색</summary>
+       채우기
+  </details>
+  
+   <details>
+   <summary>전시 날짜별 검색</summary>
+        채우기
+  </details>
   <details>
    <summary>전시 승인</summary>
     <img width="700" src="https://user-images.githubusercontent.com/79203932/136372362-d3034a6e-df10-48d3-ae62-cc8345abffac.gif"/>
@@ -227,6 +246,11 @@ https://art-ground.io/
    <details>
    <summary>전시 마감</summary>
     <img width="700" src="https://user-images.githubusercontent.com/79203932/136372400-846c8cc8-5148-4e03-b894-468a33980223.gif"/>
+  </details>
+  
+  <details>
+   <summary>회원 리뷰 조회 + 무한스크롤 </summary>
+    
   </details>
   
   <details>
