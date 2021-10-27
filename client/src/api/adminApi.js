@@ -2,14 +2,14 @@ import axios from "axios";
 
 export function getAllExhibition(
   setExhibitData,
-  filter,
+  exFilter,
   startDateNum,
   endDateNum
 ) {
   return axios
     .get(`${process.env.REACT_APP_DEPOLOY_SERVER_URI}/exhibition`)
     .then((result) => {
-      if (filter === "") {
+      if (exFilter === "") {
         let foundDay = result.data.data;
         if (startDateNum && !endDateNum) {
           foundDay = result.data.data.filter((el) => {
@@ -26,13 +26,13 @@ export function getAllExhibition(
         setExhibitData(foundDay);
       } else {
         let res = result.data.data.filter((el) => {
-          return el.title.toLowerCase().includes(filter.toLowerCase());
+          return el.title.toLowerCase().includes(exFilter.toLowerCase());
         });
         res = res.concat(
           result.data.data.filter((el) => {
             return el.author.nickname
               .toLowerCase()
-              .includes(filter.toLowerCase());
+              .includes(exFilter.toLowerCase());
           })
         );
 
@@ -66,6 +66,7 @@ export function deleteExhibition(setConfirmModal, el) {
     .catch((err) => console.log(err));
 }
 
+//일반 리뷰데이터
 export function getAllReviews(setReviewData) {
   return axios
     .get(`${process.env.REACT_APP_DEPOLOY_SERVER_URI}/admin/review`)
@@ -75,18 +76,39 @@ export function getAllReviews(setReviewData) {
     .catch((err) => console.log(err));
 }
 
-export async function getinfiniteData() {
+export async function getinfiniteData(revFilter) {
   try {
     const result = await axios.get(
       `${process.env.REACT_APP_DEPOLOY_SERVER_URI}/admin/review`
     );
-    return result.data.data;
+    if (revFilter === "") {
+      return result.data.data;
+    } else {
+      let res = result.data.data.filter((el) => {
+        console.log(el.exhibition);
+        return el.exhibition.title
+          .toLowerCase()
+          .includes(revFilter.toLowerCase());
+      });
+      res = res.concat(
+        result.data.data.filter((el) => {
+          return el.comments.toLowerCase().includes(revFilter.toLowerCase());
+        })
+      );
+      res = res.concat(
+        result.data.data.filter((el) => {
+          return el.user.nickname
+            .toLowerCase()
+            .includes(revFilter.toLowerCase());
+        })
+      );
+      return res;
+    }
   } catch (err) {
     return console.log(err);
   }
 }
 
-//리뷰삭제
 export function deleteReviews(setDeleteModal, el) {
   return axios
     .delete(
