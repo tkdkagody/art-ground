@@ -1,3 +1,13 @@
+코드스테이츠에서 진행한 4주 프로젝트 art-ground의  리팩토링 레포지토리입니다 ! <br>
+wiki 혹은 프로젝트 진행사항을 확인하려면 아래 링크를 통해 원본 레포지토리로 이동해주세요 :)  
+<br><br>
+
+- 4주프로젝트 마무리 원본 레포지토리 : https://github.com/codestates/art-ground
+- devlog 및 errhandling : https://chisel-tachometer-a65.notion.site/79654bbe9f5f4b609cb804ead723354f
+- 회고 블로그 https://velog.io/@beablessing
+
+----------------------------------------------------------------------------
+
 ## 🏡  art-Ground  🏡 
 <img width="824" src="https://user-images.githubusercontent.com/83934037/138430276-8d79c0cf-4d9e-4303-8879-3324c7b3c0b8.gif">
 
