@@ -76,9 +76,9 @@ const InfoModify = ({
 
   const clickModify = () => {
     const userData = {
-      nickName: nickName,
-      profileImg: img,
-      authorDesc: authDesc,
+      nickname: nickName,
+      profile_img: img,
+      author_desc: authDesc,
     };
     infoModify(userData, history, setUserinfo);
   };
