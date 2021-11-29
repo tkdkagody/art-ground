@@ -191,16 +191,9 @@ function App() {
             isAdmin={isAdmin}
             setModalOpen={setModalOpen}
           />
-<<<<<<< HEAD
-          <GalleryDetail
-            isLogin={isLogin}
-            userinfo={userinfo}
-            handle3dExhibition={(el) => setThreeDSelected(el)}
-=======
           <GalleryDetail 
           isLogin={isLogin}
           userinfo={userinfo}
->>>>>>> f3ee86e4e3c9c90a0507dce031cbad4fc11148d5
           />
           <ScrollButton />
         </Route>
