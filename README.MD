@@ -231,7 +231,7 @@ https://art-ground.io/
   
   <details>
    <summary>전시조회</summary>
-       <img width="700" src="https://images.velog.io/images/beablessing/post/59799bfc-12ba-4dac-aa22-1d450d07adeb/Hnet-image.gif"/>
+       <img src="https://images.velog.io/images/beablessing/post/763df3bf-165e-4992-9399-ed126cfd6dd2/Hnet.com-image%20(1).gif"/>
   </details>
   
    <details>
