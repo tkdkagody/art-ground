@@ -231,8 +231,13 @@ https://art-ground.io/
   
   <details>
    <summary>전시조회</summary>
-       <img src="https://images.velog.io/images/beablessing/post/763df3bf-165e-4992-9399-ed126cfd6dd2/Hnet.com-image%20(1).gif"/>
+       <img width="600"  src="https://images.velog.io/images/beablessing/post/763df3bf-165e-4992-9399-ed126cfd6dd2/Hnet.com-image%20(1).gif"/>
   </details>
+  <details>
+   <summary>전시검색</summary>
+       <img width="700"  src="https://images.velog.io/images/beablessing/post/93ac3cdd-2e8d-4250-a272-6274fbd1b8a6/Webp.net-resizeimage%20(1).gif"/>
+  </details>
+  
   
    <details>
    <summary>전시 날짜별 검색</summary>
